@@ -13,6 +13,10 @@
   <source src="audio-perfect.mp3" type="audio/mpeg">
 </audio>
 <button id="musicToggle" class="music-toggle" aria-label="Pausar música" title="Pausar música">🎵 Música</button>
+<div id="musicPrompt" class="music-prompt" hidden>
+  <button id="startMusic">🎵 Toca aquí para escuchar nuestra canción ❤️</button>
+  <span id="musicStatus">La música comenzará con tu toque.</span>
+</div>
 
 <section class="gate" id="gate">
   <div class="gate-card">
@@ -177,28 +181,62 @@
 const gate=document.getElementById('gate'),site=document.getElementById('site');
 const bgMusic=document.getElementById('bgMusic');
 const musicToggle=document.getElementById('musicToggle');
+const musicPrompt=document.getElementById('musicPrompt');
+const startMusic=document.getElementById('startMusic');
+const musicStatus=document.getElementById('musicStatus');
+
+function playMusic(){
+  bgMusic.volume=0.22;
+  const p=bgMusic.play();
+  if(p){
+    p.then(()=>{
+      musicPrompt.hidden=true;
+      musicToggle.classList.add('visible');
+      musicToggle.textContent='🎵 Música';
+      musicStatus.textContent='🎵 La música está sonando ❤️';
+    }).catch(()=>{
+      musicPrompt.hidden=false;
+      musicStatus.textContent='Toca el botón para iniciar la música.';
+    });
+  }
+}
 
 document.getElementById('begin').onclick=()=>{
   gate.classList.add('close');
-  bgMusic.volume=0.22;
-  bgMusic.play().catch(()=>{});
-  musicToggle.classList.add('visible');
-  setTimeout(()=>{gate.style.display='none';site.hidden=false;window.scrollTo(0,0)},800);
+  setTimeout(()=>{
+    gate.style.display='none';
+    site.hidden=false;
+    window.scrollTo(0,0);
+    musicPrompt.hidden=false;
+    playMusic();
+  },800);
+};
+
+startMusic.onclick=()=>{
+  playMusic();
 };
 
 musicToggle.onclick=()=>{
   if(bgMusic.paused){
-    bgMusic.play().catch(()=>{});
-    musicToggle.textContent='🎵 Música';
-    musicToggle.setAttribute('aria-label','Pausar música');
-    musicToggle.title='Pausar música';
+    playMusic();
   }else{
     bgMusic.pause();
     musicToggle.textContent='🔇 Música';
     musicToggle.setAttribute('aria-label','Reanudar música');
     musicToggle.title='Reanudar música';
+    musicPrompt.hidden=false;
+    musicStatus.textContent='Música pausada. Toca el botón para continuar.';
   }
 };
+
+bgMusic.addEventListener('error',()=>{
+  musicPrompt.hidden=false;
+  musicStatus.textContent='No se pudo cargar la canción. Revisa que audio-perfect.mp3 esté en el repositorio.';
+});
+bgMusic.addEventListener('playing',()=>{
+  musicPrompt.hidden=true;
+  musicToggle.classList.add('visible');
+});
 
 const videos=document.querySelectorAll('video');
 videos.forEach(video=>{
