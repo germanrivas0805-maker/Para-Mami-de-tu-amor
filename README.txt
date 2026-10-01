@@ -13,3 +13,5 @@ ACTUALIZACION: Se agregó un botón visible para iniciar la música con un toque
 
 
 ACTUALIZACION: La galeria ahora funciona como presentacion automatica. Las 16 fotos pasan solas cada 4 segundos con transicion suave; tambien se puede avanzar o retroceder manualmente con las flechas, puntos o deslizando en el celular.
+
+ACTUALIZACION: La galeria ahora cambia automaticamente cada 4 segundos y no se detiene al pasar el cursor sobre las fotos.
