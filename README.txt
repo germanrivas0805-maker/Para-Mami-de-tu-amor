@@ -10,3 +10,6 @@ ACTUALIZACION: Se agrego musica de fondo (audio-perfect.mp3). Comienza al pulsar
 
 
 ACTUALIZACION: Se agregó un botón visible para iniciar la música con un toque, compatible con las restricciones de reproducción de celulares.
+
+
+ACTUALIZACION: La galeria ahora funciona como presentacion automatica. Las 16 fotos pasan solas cada 4 segundos con transicion suave; tambien se puede avanzar o retroceder manualmente con las flechas, puntos o deslizando en el celular.
