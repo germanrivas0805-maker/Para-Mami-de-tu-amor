@@ -32,3 +32,26 @@
 .song-transition p:not(.eyebrow){color:#d4c6cc;max-width:620px;margin:0 auto}
 .continue-song{margin-top:28px;padding:14px 25px;border:1px solid #fff4;background:transparent;color:#fff;border-radius:999px;font:500 11px Montserrat;letter-spacing:.08em;cursor:pointer;transition:.25s}
 .continue-song:hover{background:var(--rose2);color:#2a1720;transform:translateY(-3px)}
+
+/* Música de fondo */
+.music-toggle{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:9999;
+  display:none;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(25,12,25,.82);
+  color:#fff;
+  padding:10px 15px;
+  border-radius:999px;
+  font:inherit;
+  font-size:13px;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  box-shadow:0 8px 24px rgba(0,0,0,.25);
+}
+.music-toggle.visible{display:block}
+@media(max-width:600px){
+  .music-toggle{right:12px;bottom:12px;padding:9px 13px}
+}

@@ -9,6 +9,10 @@
 </head>
 <body>
 <div id="hearts"></div>
+<audio id="bgMusic" loop preload="auto">
+  <source src="audio-perfect.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" class="music-toggle" aria-label="Pausar música" title="Pausar música">🎵 Música</button>
 
 <section class="gate" id="gate">
   <div class="gate-card">
@@ -171,10 +175,37 @@
 
 <script>
 const gate=document.getElementById('gate'),site=document.getElementById('site');
+const bgMusic=document.getElementById('bgMusic');
+const musicToggle=document.getElementById('musicToggle');
+
 document.getElementById('begin').onclick=()=>{
   gate.classList.add('close');
+  bgMusic.volume=0.22;
+  bgMusic.play().catch(()=>{});
+  musicToggle.classList.add('visible');
   setTimeout(()=>{gate.style.display='none';site.hidden=false;window.scrollTo(0,0)},800);
 };
+
+musicToggle.onclick=()=>{
+  if(bgMusic.paused){
+    bgMusic.play().catch(()=>{});
+    musicToggle.textContent='🎵 Música';
+    musicToggle.setAttribute('aria-label','Pausar música');
+    musicToggle.title='Pausar música';
+  }else{
+    bgMusic.pause();
+    musicToggle.textContent='🔇 Música';
+    musicToggle.setAttribute('aria-label','Reanudar música');
+    musicToggle.title='Reanudar música';
+  }
+};
+
+const videos=document.querySelectorAll('video');
+videos.forEach(video=>{
+  video.addEventListener('play',()=>bgMusic.pause());
+  video.addEventListener('pause',()=>{if(video.currentTime<video.duration) bgMusic.play().catch(()=>{});});
+  video.addEventListener('ended',()=>bgMusic.play().catch(()=>{}));
+});
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:'smooth'}));
 const h=document.getElementById('hearts');
 for(let i=0;i<24;i++){let s=document.createElement('span');s.textContent=['♡','♥','✦','·'][Math.floor(Math.random()*4)];s.style.left=Math.random()*100+'%';s.style.animationDelay=Math.random()*8+'s';s.style.animationDuration=7+Math.random()*8+'s';h.appendChild(s)}

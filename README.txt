@@ -4,3 +4,6 @@ Después activa GitHub Pages desde Settings > Pages > Deploy from branch > main 
 
 
 ACTUALIZACION: Esta version incluye 16 fotos en la galeria (9 anteriores + 7 nuevas), ademas de los 2 videos.
+
+
+ACTUALIZACION: Se agrego musica de fondo (audio-perfect.mp3). Comienza al pulsar 'Ahora sí, dime...', tiene volumen suave y se pausa mientras se reproduce cualquiera de los videos; despues vuelve a sonar.
